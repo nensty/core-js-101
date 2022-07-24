@@ -57,15 +57,15 @@ function getJSON(obj) {
  *    const r = fromJSON(Circle.prototype, '{"radius":10}');
  *
  */
-function fromJSON(/* proto, json */) {
-  throw new Error('Not implemented');
+function fromJSON(proto, json) {
+  return Object.setPrototypeOf(JSON.parse(json), proto);
 }
 
 
 /**
  * Css selectors builder
  *
- * Each complex selector can consists of type, id, class, attribute, pseudo-class
+ * Each complex selector can consist of type, id, class, attribute, pseudo-class
  * and pseudo-element selectors:
  *
  *    element#id.class[attr]:pseudoClass::pseudoElement
@@ -118,30 +118,37 @@ function fromJSON(/* proto, json */) {
 
 const cssSelectorBuilder = {
   element(/* value */) {
+    // return `${value}`;
     throw new Error('Not implemented');
   },
 
   id(/* value */) {
+    // return `#${value}`;
     throw new Error('Not implemented');
   },
 
   class(/* value */) {
+    // return `.${value}`;
     throw new Error('Not implemented');
   },
 
   attr(/* value */) {
+    // return `[${value}]`;
     throw new Error('Not implemented');
   },
 
   pseudoClass(/* value */) {
+    // return `:${value}`;
     throw new Error('Not implemented');
   },
 
   pseudoElement(/* value */) {
+    // return `::${value}`;
     throw new Error('Not implemented');
   },
 
   combine(/* selector1, combinator, selector2 */) {
+    // return `${selector1} ${combinator} ${selector2}`;
     throw new Error('Not implemented');
   },
 };

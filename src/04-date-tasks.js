@@ -56,11 +56,7 @@ function parseDataFromIso8601(value) {
 function isLeapYear(date) {
   const year = date.getFullYear();
 
-  if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
-    return true;
-  }
-
-  return false;
+  return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 }
 
 
@@ -91,7 +87,7 @@ function timeSpanToString(startDate, endDate) {
  *
  * SMALL TIP: convert to radians just once, before return in order to not lost precision
  *
- * @param {date} date
+ * @param {Date} date
  * @return {number}
  *
  * @example:
@@ -100,8 +96,14 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,18, 0) => Math.PI
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
-function angleBetweenClockHands(/* date */) {
-  throw new Error('Not implemented');
+function angleBetweenClockHands(date) {
+  const hours = date.getUTCHours() % 12;
+  const minutes = date.getMinutes();
+
+  const degrees = Math.abs(0.5 * (hours * 60 - 11 * minutes));
+  const newDegrees = (degrees > 180) ? degrees % 180 : degrees;
+
+  return (newDegrees * Math.PI) / 180;
 }
 
 

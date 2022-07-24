@@ -7,7 +7,7 @@
 
 
 /**
- * Return Promise object that is resolved with string value === 'Hooray!!! She said "Yes"!',
+ *c
  * if boolean value === true is passed, resolved with string value === 'Oh no, she said "No".',
  * if boolean value === false is passed, and rejected
  * with error message === 'Wrong parameter is passed! Ask her again.',
@@ -29,6 +29,16 @@
  *                                                    //  Ask her again.';
  */
 function willYouMarryMe(/* isPositiveAnswer */) {
+  // console.log(isPositiveAnswer);
+  // if (isPositiveAnswer === undefined || typeof isPositiveAnswer !== 'boolean') {
+  //   // return Promise.reject('Wrong parameter is passed! Ask her again.')
+  //   throw new Error('Wrong parameter is passed! Ask her again.');
+  // }
+  //
+  // if (isPositiveAnswer) {
+  //   return Promise.resolve('Hooray!!! She said "Yes"!');
+  // }
+  // return Promise.resolve('Oh no, she said "No".');
   throw new Error('Not implemented');
 }
 
@@ -48,8 +58,8 @@ function willYouMarryMe(/* isPositiveAnswer */) {
  *    })
  *
  */
-function processAllPromises(/* array */) {
-  throw new Error('Not implemented');
+function processAllPromises(array) {
+  return Promise.all(array);
 }
 
 /**
@@ -71,8 +81,8 @@ function processAllPromises(/* array */) {
  *    })
  *
  */
-function getFastestPromise(/* array */) {
-  throw new Error('Not implemented');
+function getFastestPromise(array) {
+  return Promise.race(array);
 }
 
 /**
