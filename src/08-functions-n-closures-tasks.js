@@ -23,8 +23,10 @@
  *   getComposition(Math.sin, Math.asin)(x) => Math.sin(Math.asin(x))
  *
  */
-function getComposition(/* f, g */) {
-  throw new Error('Not implemented');
+function getComposition(f, g) {
+  return function closure(a) {
+    return f(g(a));
+  };
 }
 
 
@@ -44,8 +46,10 @@ function getComposition(/* f, g */) {
  *   power05(16) => 4
  *
  */
-function getPowerFunction(/* exponent */) {
-  throw new Error('Not implemented');
+function getPowerFunction(exponent) {
+  return function closure(a) {
+    return a ** exponent;
+  };
 }
 
 
@@ -81,8 +85,18 @@ function getPolynom() {
  *   ...
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
-function memoize(/* func */) {
-  throw new Error('Not implemented');
+function memoize(func) {
+  const cache = {};
+
+  return function memo() {
+    if (func in cache) {
+      return cache[func];
+    }
+
+    const result = func();
+    cache[func] = result;
+    return result;
+  };
 }
 
 
@@ -137,7 +151,8 @@ function logger(/* func, logFunc */) {
 /**
  * Return the function with partial applied arguments
  *
- * @param {Function} fn
+ * @param {Function} fn, args1
+ * @param {Array} args1
  * @return {Function}
  *
  * @example
@@ -147,8 +162,10 @@ function logger(/* func, logFunc */) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(/* fn, ...args1 */) {
-  throw new Error('Not implemented');
+function partialUsingArguments(fn, ...args1) {
+  return function closure(...args2) {
+    return fn(...args1, ...args2);
+  };
 }
 
 
@@ -169,8 +186,13 @@ function partialUsingArguments(/* fn, ...args1 */) {
  *   getId4() => 7
  *   getId10() => 11
  */
-function getIdGeneratorFunction(/* startFrom */) {
-  throw new Error('Not implemented');
+function getIdGeneratorFunction(startFrom) {
+  let id = startFrom - 1;
+  return function closure() {
+    id += 1;
+
+    return id;
+  };
 }
 
 
