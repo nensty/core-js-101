@@ -194,15 +194,30 @@ function isInsideCircle(/* circle, point */) {
  * Returns the first non repeated char in the specified strings otherwise returns null.
  *
  * @param {string} str
- * @return {string}
+ * @return {string | null}
  *
  * @example:
  *   'The quick brown fox jumps over the lazy dog' => 'T'
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  const map = new Map();
+
+  for (let i = 0; i < str.length; i += 1) {
+    let count = 0;
+    if ([...map.keys()].includes(str[i])) {
+      count = map.get(str[i]);
+    }
+
+    map.set(str[i], count + 1);
+  }
+
+  if (![...map.values()].includes(1)) {
+    return null;
+  }
+
+  return Array.from(map).filter((curArr) => curArr[1] === 1)[0][0];
 }
 
 
@@ -228,8 +243,11 @@ function findFirstSingleChar(/* str */) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  const startNumber = (a < b) ? a : b;
+  const endNumber = (a > b) ? a : b;
+
+  return `${isStartIncluded ? '[' : '('}${startNumber}, ${endNumber}${isEndIncluded ? ']' : ')'}`;
 }
 
 
@@ -245,8 +263,8 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  return [...str].reverse().join('');
 }
 
 
@@ -262,8 +280,8 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  return Number([...num.toString()].reverse().join(''));
 }
 
 
@@ -296,7 +314,7 @@ function isCreditCardNumber(/* ccn */) {
  *   step1 : find sum of all digits
  *   step2 : if sum > 9 then goto step1 otherwise return the sum
  *
- * @param {number} n
+ * @param {number} num
  * @return {number}
  *
  * @example:
@@ -305,8 +323,10 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  const sum = [...num.toString()].reduce((acc, value) => acc + +value, 0);
+
+  return sum < 9 ? sum : getDigitalRoot(sum);
 }
 
 
@@ -332,6 +352,19 @@ function getDigitalRoot(/* num */) {
  *   '{[(<{[]}>)]}' = true
  */
 function isBracketsBalanced(/* str */) {
+  // const map = new Map();
+  //
+  // for (let i = 0; i < str.length; i += 1) {
+  //   let count = 0;
+  //
+  //   if ([...map.keys()].includes(str[i])) {
+  //     count = map.get(str[i]);
+  //   }
+  //
+  //   map.set(str[i], count + 1);
+  // }
+  //
+  // console.log('map', map);
   throw new Error('Not implemented');
 }
 
@@ -356,8 +389,8 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
